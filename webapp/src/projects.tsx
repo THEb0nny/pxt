@@ -2431,6 +2431,11 @@ export class NewProjectDialog extends data.Component<ISettingsProps, NewProjectD
                 label: python ? lf("Blocks, {0}, and {1}", "JavaScript", "Python") : lf("Blocks and {0}", "JavaScript"),
                 title: python ? lf("Blocks, {0}, and {1}", "JavaScript", "Python") : lf("Blocks and {0}", "JavaScript")
             },
+            {
+                id: pxt.editor.LanguageRestriction.BlocksOnly,
+                label: lf("{0} Only", lf("Blocks")),
+                title: lf("{0} Only", lf("Blocks"))
+            },
             python && {
                 id: pxt.editor.LanguageRestriction.PythonOnly,
                 label: lf("{0} Only", "Python"),
@@ -2441,7 +2446,7 @@ export class NewProjectDialog extends data.Component<ISettingsProps, NewProjectD
                 label: lf("{0} Only", "JavaScript"),
                 title: lf("{0} Only", "JavaScript")
             }
-        ];
+        ].filter(item => !!item);
         const classes = this.props.parent.createModalClasses("newproject");
         const prompt = lf("Give your project a name.");
 

@@ -174,7 +174,8 @@ export class HeaderBar extends data.Component<ISettingsProps, {}> {
         const languageRestriction = pkg.mainPkg?.config?.languageRestriction;
         // If there is only one editor (eg Py only, no assets), we display a label instead of a toggle
         const hideToggle = !showAssets && (languageRestriction === pxt.editor.LanguageRestriction.JavaScriptOnly
-            || languageRestriction === pxt.editor.LanguageRestriction.PythonOnly) || targetTheme.blocksOnly;
+            || languageRestriction === pxt.editor.LanguageRestriction.PythonOnly
+            || languageRestriction === pxt.editor.LanguageRestriction.BlocksOnly) || targetTheme.blocksOnly;
 
         switch (view) {
             case "tutorial":
@@ -215,6 +216,8 @@ export class HeaderBar extends data.Component<ISettingsProps, {}> {
                             return <sui.MenuItem className="centered" icon="xicon python" name="Python" />
                         case pxt.editor.LanguageRestriction.JavaScriptOnly:
                             return <sui.MenuItem className="centered" icon="xicon js" name="JavaScript" />
+                        case pxt.editor.LanguageRestriction.BlocksOnly:
+                            return <sui.MenuItem className="centered" icon="xicon blocks" name={lf("Blocks")} />
                         default:
                             break;
                     }

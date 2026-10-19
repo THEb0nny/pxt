@@ -143,6 +143,8 @@ export class FileList extends data.Component<ISettingsProps, FileListState> {
                         return !/\.(blocks|py)$/.test(f.name);
                     case pxt.editor.LanguageRestriction.PythonOnly:
                         return !/\.(blocks|ts)$/.test(f.name);
+                    case pxt.editor.LanguageRestriction.BlocksOnly:
+                        return !/\.(py|ts)$/.test(f.name);
                     default:
                         return true;
                 }

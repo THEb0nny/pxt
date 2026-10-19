@@ -3151,11 +3151,18 @@ export class ProjectView
                 cfg.preferredEditor = pxt.JAVASCRIPT_PROJECT_NAME;
             } else if (options.languageRestriction === pxt.editor.LanguageRestriction.PythonOnly) {
                 cfg.preferredEditor = pxt.PYTHON_PROJECT_NAME;
+            } else if (options.languageRestriction === pxt.editor.LanguageRestriction.BlocksOnly) {
+                filesToDrop = /\.(py)$/;
+                cfg.preferredEditor = pxt.BLOCKS_PROJECT_NAME;
             }
 
             cfg.languageRestriction = options.languageRestriction;
             cfg.files = cfg.files.filter(f => !filesToDrop.test(f));
-            delete files[pxt.MAIN_BLOCKS];
+            if (options.languageRestriction === pxt.editor.LanguageRestriction.BlocksOnly) {
+                delete files[pxt.MAIN_PY];
+            } else {
+                delete files[pxt.MAIN_BLOCKS];
+            }
         }
 
         // ensure a main.py is ready if this is the desired project
@@ -3180,7 +3187,7 @@ export class ProjectView
             {
                 name: cfg.name,
                 meta: {},
-                editor: options.preferredEditor || options.prj.id,
+                editor: options.preferredEditor || cfg.preferredEditor || options.prj.id,
                 pubId: "",
                 pubCurrent: false,
                 target: pxt.appTarget.id,

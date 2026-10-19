@@ -776,7 +776,7 @@ export class EditorSelector extends data.Component<IEditorSelectorProps, {}> {
         }
 
         return (
-            <div id="editortoggle" className={`ui grid padded ${(pyOnly || tsOnly) ? "one-language" : ""}`} role="group" aria-label={lf("Editor toggle")}>
+            <div id="editortoggle" className={`ui grid padded ${(pyOnly || tsOnly || blocksOnly) ? "one-language" : ""}`} role="group" aria-label={lf("Editor toggle")}>
                 {showSandbox && <SandboxMenuItem parent={parent} />}
                 {showBlocks && <BlocksMenuItem parent={parent} />}
                 {textLanguage}
